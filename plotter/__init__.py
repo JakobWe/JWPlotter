@@ -8,6 +8,7 @@ __client = PyQtLivePlotterCreatorConnector("Mein eins live")
 update_plot = __client.update_plot
 create_plot = __client.create_plot
 start_run = __client.start_run
+clear_plot = __client.clear_plot
 Modes = Modes
 
-__all__ = ["update_plot", "create_plot", "Modes"]
+__all__ = ["update_plot", "create_plot", "clear_plot", "Modes"]

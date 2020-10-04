@@ -44,7 +44,8 @@ class PyQtLivePlotter(QtGui.QMainWindow):
             "exit": self.exit,
             "save_plot": self.save_fig,
             "single_datapoint": self._new_update,
-            "create_plot": self._register_new_plot
+            "create_plot": self._register_new_plot,
+            "clear_plot": self._clear_plot,
         }
 
     def _register_new_plot(self, data_array, xlabel="xachse", ylabel="yachse"):
@@ -69,6 +70,9 @@ class PyQtLivePlotter(QtGui.QMainWindow):
             self.timer.stop()
             self.timer.deleteLater()
             self.exit(None)
+
+    def _clear_plot(self, message):
+        self.plots[message[1]].clear_plot()
 
     def exit(self, data):
         sys.exit()
@@ -118,6 +122,10 @@ class PyQtLivePlotterCreatorConnector:
     def exit(self):
         if self.plotting:
             self.pqueue.put(tuple(["exit", None]))
+
+    def clear_plot(self, title):
+        if self.plotting:
+            self.pqueue.put(tuple(["clear_plot", title]))
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.exit()

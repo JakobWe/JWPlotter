@@ -15,6 +15,12 @@ class AppendPlot:
         self.values.append(value)
         self.plot.setData(self.values)
 
+    def clear_plot(self):
+        print("i am called!11")
+        self.values = []
+        self.plot.setData(self.values)
+        # self.plot.clear()
+
 
 class ReplacePlot:
     def __init__(self, canvas, title, ylabel, xlabel):
@@ -27,6 +33,10 @@ class ReplacePlot:
     def update_plot(self, message):
         _, title, values = message
         self.plot.setData(values)
+
+    def clear_plot(self):
+        print("i am called!")
+        self.plot.setData([1])
 
 
 class Modes(Enum):

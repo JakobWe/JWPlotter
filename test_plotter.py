@@ -19,5 +19,11 @@ with plotter.start_run(plotting=True):
     # oder
     update_plt2([0, 1, 2])
 
+    plotter.clear_plot("plot1")
+
+    plotter.update_plot("plot1", 3)
+    plotter.update_plot("plot1", 4)
+    plotter.update_plot("plot1", 5)
+
     while 1:
         pass
