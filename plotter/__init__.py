@@ -12,4 +12,5 @@ clear_plot = __client.clear_plot
 exit = __client.exit
 Modes = Modes
 
-__all__ = ["update_plot", "create_plot", "clear_plot", "exit", "Modes"]
+__all__ = ["update_plot", "create_plot",
+           "clear_plot", "exit", "start_run", "Modes"]
