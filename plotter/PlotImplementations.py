@@ -16,10 +16,8 @@ class AppendPlot:
         self.plot.setData(self.values)
 
     def clear_plot(self):
-        print("i am called!11")
         self.values = []
         self.plot.setData(self.values)
-        # self.plot.clear()
 
 
 class ReplacePlot:
@@ -35,7 +33,6 @@ class ReplacePlot:
         self.plot.setData(values)
 
     def clear_plot(self):
-        print("i am called!")
         self.plot.setData([1])
 
 
