@@ -33,7 +33,8 @@ class ReplacePlot:
         self.plot.setData(values)
 
     def clear_plot(self):
-        self.plot.setData([1])
+        self.values = []
+        self.plot.setData(self.values)
 
 
 class Modes(Enum):
