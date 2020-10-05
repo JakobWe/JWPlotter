@@ -1,16 +1,35 @@
 from enum import Enum
+from abc import ABC, abstractmethod
 
 
-class AppendPlot:
+class AbstractPlot(ABC):
     def __init__(self, canvas, title, kwargs):
         xlabel = kwargs.pop('xlabel', 'x-axis')
         ylabel = kwargs.pop('ylabel', 'y-axis')
 
         plot = canvas.addPlot(title=title)
+
+        plot.showGrid(x=True, y=True, alpha=0.8)
         plot.setLabel("left", ylabel)
         plot.setLabel("bottom", xlabel)
-        plot.showGrid(x=True, y=True, alpha=0.8)
         self.plot = plot.plot(pen='b')
+
+    @abstractmethod
+    def update_plot(self):
+        pass
+
+    @abstractmethod
+    def clear_plot(self):
+        pass
+
+    def set_plot_color(self, color):
+        self.plot.setPen(color)
+
+
+class AppendPlot(AbstractPlot):
+    def __init__(self, canvas, title, kwargs):
+        super().__init__(canvas, title, kwargs)
+
         self.values = []
 
     def update_plot(self, message):
@@ -23,15 +42,10 @@ class AppendPlot:
         self.plot.setData(self.values)
 
 
-class ReplacePlot:
+class ReplacePlot(AbstractPlot):
     def __init__(self, canvas, title, kwargs):
-        xlabel = kwargs.pop('xlabel', 'x-axis')
-        ylabel = kwargs.pop('ylabel', 'y-axis')
-        plot = canvas.addPlot(title=title)
-        plot.setLabel("left", ylabel)
-        plot.setLabel("bottom", xlabel)
-        plot.showGrid(x=True, y=True, alpha=0.8)
-        self.plot = plot.plot(pen='r')
+        super().__init__(canvas, title, kwargs)
+        super().set_plot_color('r')
 
     def update_plot(self, message):
         _, _, values = message
