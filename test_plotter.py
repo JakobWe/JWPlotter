@@ -2,7 +2,8 @@ import plotter
 
 with plotter.start_run(plotting=True):
 
-    update_plt1 = plotter.create_plot("plot1", mode=plotter.Modes.APPEND)
+    update_plt1 = plotter.create_plot(
+        "plot1", mode=plotter.Modes.APPEND, xlabel="my_x_label", ylabel="my_y_label")
     # und dann
     plotter.update_plot("plot1", 0)
     plotter.update_plot("plot1", 1)

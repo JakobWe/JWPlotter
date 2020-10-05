@@ -2,7 +2,10 @@ from enum import Enum
 
 
 class AppendPlot:
-    def __init__(self, canvas, title, ylabel, xlabel):
+    def __init__(self, canvas, title, kwargs):
+        xlabel = kwargs.pop('xlabel', 'x-axis')
+        ylabel = kwargs.pop('ylabel', 'y-axis')
+
         plot = canvas.addPlot(title=title)
         plot.setLabel("left", ylabel)
         plot.setLabel("bottom", xlabel)
@@ -21,7 +24,9 @@ class AppendPlot:
 
 
 class ReplacePlot:
-    def __init__(self, canvas, title, ylabel, xlabel):
+    def __init__(self, canvas, title, kwargs):
+        xlabel = kwargs.pop('xlabel', 'x-axis')
+        ylabel = kwargs.pop('ylabel', 'y-axis')
         plot = canvas.addPlot(title=title)
         plot.setLabel("left", ylabel)
         plot.setLabel("bottom", xlabel)

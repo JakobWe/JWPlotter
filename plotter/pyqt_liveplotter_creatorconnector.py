@@ -28,9 +28,9 @@ class pyqt_liveplotter_creatorconnector:
         if self.plotting:
             self.pqueue.put(tuple(["single_datapoint", plot_num, values]))
 
-    def create_plot(self, title, mode=Modes.REPLACE):
+    def create_plot(self, title, mode=Modes.REPLACE, **kwargs):
         if self.plotting:
-            self.pqueue.put(tuple(["create_plot", title, mode]))
+            self.pqueue.put(tuple(["create_plot", title, mode, kwargs]))
 
             def update_function(values):
                 return self.update_plot(title, values)

@@ -48,9 +48,10 @@ class PyQtLivePlotter(QtGui.QMainWindow):
             "clear_plot": self._clear_plot,
         }
 
-    def _register_new_plot(self, data_array, xlabel="xachse", ylabel="yachse"):
-        _, title, mode = data_array
-        self.plots[title] = mode.value(self.canvas, title, ylabel, xlabel)
+    def _register_new_plot(self, data_array):
+        _, title, mode, kwargs = data_array
+        print(mode)
+        self.plots[title] = mode.value(self.canvas, title, kwargs)
 
         if len(self.plots) % self.columns == 0:
             self.canvas.nextRow()
@@ -61,6 +62,11 @@ class PyQtLivePlotter(QtGui.QMainWindow):
         pg.QtGui.QApplication.processEvents()
 
     def await_pipe(self):
+        while self.pqueue.qsize() > 0:
+            data = self.pqueue.get()
+            self.decoder[data[0]](data)
+
+    def await_pipe_old(self):
         try:
             while self.pqueue.qsize() > 0:
                 data = self.pqueue.get()
