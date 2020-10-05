@@ -11,7 +11,7 @@ class AppendPlot:
         self.values = []
 
     def update_plot(self, message):
-        _, title, value = message
+        _, _, value = message
         self.values.append(value)
         self.plot.setData(self.values)
 
@@ -29,7 +29,7 @@ class ReplacePlot:
         self.plot = plot.plot(pen='r')
 
     def update_plot(self, message):
-        _, title, values = message
+        _, _, values = message
         self.plot.setData(values)
 
     def clear_plot(self):

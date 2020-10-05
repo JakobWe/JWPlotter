@@ -78,71 +78,9 @@ class PyQtLivePlotter(QtGui.QMainWindow):
         sys.exit()
 
     def save_fig(self, data):
-        exporter = pg.exporters.ImageExporter()
+        exporter = pg.exporters.ImageExporter(self.plots)
         # set export parameters if needed
         # (note this also affects height parameter)
         exporter.parameters()['width'] = 100
         # save to file
         exporter.export('results/result.png')
-
-
-class PyQtLivePlotterCreatorConnector:
-    def __init__(self, title):
-        self.title = title
-        self.parent_conn = None
-        self.pqueue = None
-        self.plotting = False
-
-    def create_pyqt_liveplotter(self, title):
-        app = QtGui.QApplication(sys.argv)
-        thisapp = PyQtLivePlotter(title, self.pqueue)
-        thisapp.show()
-        app.exec_()
-
-    def update_plot(self, plot_num, values):
-        if self.plotting:
-            self.pqueue.put(tuple(["single_datapoint", plot_num, values]))
-
-    def create_plot(self, title, mode=Modes.REPLACE):
-        if self.plotting:
-            self.pqueue.put(tuple(["create_plot", title, mode]))
-
-            def update_function(values):
-                return self.update_plot(title, values)
-            return update_function
-
-        def update_function(_):
-            pass
-        return update_function
-
-    def save_fig(self):
-        if self.plotting:
-            self.pqueue.put(tuple(["save_fig", None]))
-
-    def exit(self):
-        if self.plotting:
-            self.pqueue.put(tuple(["exit", None]))
-
-    def clear_plot(self, title):
-        if self.plotting:
-            self.pqueue.put(tuple(["clear_plot", title]))
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.exit()
-
-    def __enter__(self):
-        pass
-
-    def start_run(self, plotting):
-        self.plotting = plotting
-        if plotting:
-            print("plotting!")
-            self.parent_conn, child_conn = Pipe()
-            self.pqueue = Queue()
-            process = Process(
-                target=self.create_pyqt_liveplotter, args=(self.title,))
-            process.start()
-        else:
-            print("not plotting!")
-
-        return self

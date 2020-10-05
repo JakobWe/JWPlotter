@@ -1,8 +1,8 @@
-from plotter.pyqtgraph_live_plotter import PyQtLivePlotterCreatorConnector
+from plotter.pyqt_liveplotter_creatorconnector import pyqt_liveplotter_creatorconnector
 from plotter.PlotImplementations import Modes
 
 
-__client = PyQtLivePlotterCreatorConnector("Mein eins live")
+__client = pyqt_liveplotter_creatorconnector("Mein eins live")
 
 
 update_plot = __client.update_plot
