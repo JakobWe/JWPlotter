@@ -14,9 +14,8 @@ from plotter.pyqt_live_plotter import PyQtLivePlotter
 class pyqt_liveplotter_creatorconnector:
     def __init__(self, title):
         self.title = title
-        self.parent_conn = None
         self.pqueue = None
-        self.plotting = False
+        self.plotting = True
 
     def create_pyqt_liveplotter(self, title):
         app = QtGui.QApplication(sys.argv)
@@ -56,19 +55,14 @@ class pyqt_liveplotter_creatorconnector:
         self.exit()
 
     def __enter__(self):
-        print("test")
         pass
 
     def start_run(self, plotting):
         self.plotting = plotting
         if plotting:
-            print("plotting!")
-            self.parent_conn, child_conn = Pipe()
             self.pqueue = Queue()
             process = Process(
                 target=self.create_pyqt_liveplotter, args=(self.title,))
             process.start()
-        else:
-            print("not plotting!")
 
         return self

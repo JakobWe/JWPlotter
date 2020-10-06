@@ -50,7 +50,6 @@ class PyQtLivePlotter(QtGui.QMainWindow):
 
     def _register_new_plot(self, data_array):
         _, title, mode, kwargs = data_array
-        print(mode)
         self.plots[title] = mode.value(self.canvas, title, kwargs)
 
         if len(self.plots) % self.columns == 0:
@@ -72,7 +71,6 @@ class PyQtLivePlotter(QtGui.QMainWindow):
                 data = self.pqueue.get()
                 self.decoder[data[0]](data)
         except:
-            print("I'm done")
             self.timer.stop()
             self.timer.deleteLater()
             self.exit(None)
