@@ -1,0 +1,13 @@
+LICENSE
+README.md
+setup.py
+jw_plotter/PlotImplementations.py
+jw_plotter/__init__.py
+jw_plotter/pyqt_live_plotter.py
+jw_plotter/pyqt_liveplotter_creatorconnector.py
+jw_plotter.egg-info/PKG-INFO
+jw_plotter.egg-info/SOURCES.txt
+jw_plotter.egg-info/dependency_links.txt
+jw_plotter.egg-info/requires.txt
+jw_plotter.egg-info/top_level.txt
+test/test.py

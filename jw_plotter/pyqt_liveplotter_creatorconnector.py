@@ -1,14 +1,8 @@
 import sys
-import time
-from pyqtgraph.Qt import QtCore, QtGui
-import numpy as np
-import pyqtgraph as pg
-from multiprocessing import Process, Pipe, Queue
-import threading
-import pyqtgraph.exporters
-from enum import Enum
-from plotter.PlotImplementations import Modes
-from plotter.pyqt_live_plotter import PyQtLivePlotter
+from pyqtgraph.Qt import QtWidgets
+from multiprocessing import Process, Queue
+from jw_plotter.PlotImplementations import Modes
+from jw_plotter.pyqt_live_plotter import PyQtLivePlotter
 
 
 class pyqt_liveplotter_creatorconnector:
@@ -18,7 +12,7 @@ class pyqt_liveplotter_creatorconnector:
         self.plotting = True
 
     def create_pyqt_liveplotter(self, title):
-        app = QtGui.QApplication(sys.argv)
+        app = QtWidgets.QApplication(sys.argv)
         thisapp = PyQtLivePlotter(title, self.pqueue)
         thisapp.show()
         app.exec_()

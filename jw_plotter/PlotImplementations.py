@@ -12,7 +12,7 @@ class AbstractPlot(ABC):
         plot.showGrid(x=True, y=True, alpha=0.8)
         plot.setLabel("left", ylabel)
         plot.setLabel("bottom", xlabel)
-        self.plot = plot.plot(pen='b')
+        self.plot = plot.plot(pen='w')
 
     @abstractmethod
     def update_plot(self):

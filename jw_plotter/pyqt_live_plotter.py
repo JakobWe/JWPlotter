@@ -1,16 +1,18 @@
 import sys
 import time
-from pyqtgraph.Qt import QtCore, QtGui
+# from pyqtgraph.Qt import QtCore, QtGui
+
+from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
 import pyqtgraph as pg
 from multiprocessing import Process, Pipe, Queue
 import threading
 import pyqtgraph.exporters
 from enum import Enum
-from plotter.PlotImplementations import Modes
+from jw_plotter.PlotImplementations import Modes
 
 
-class PyQtLivePlotter(QtGui.QMainWindow):
+class PyQtLivePlotter(QtWidgets.QMainWindow):
     def __init__(self, title, pqueue, parent=None):
         super(PyQtLivePlotter, self).__init__(parent)
 
@@ -19,14 +21,14 @@ class PyQtLivePlotter(QtGui.QMainWindow):
         self.pqueue = pqueue
 
         #### Create Gui Elements ###########
-        self.mainbox = QtGui.QWidget()
+        self.mainbox = QtWidgets.QWidget()
         self.setCentralWidget(self.mainbox)
-        self.mainbox.setLayout(QtGui.QVBoxLayout())
+        self.mainbox.setLayout(QtWidgets.QVBoxLayout())
 
         self.canvas = pg.GraphicsLayoutWidget()
         self.mainbox.layout().addWidget(self.canvas)
 
-        self.label = QtGui.QLabel()
+        self.label = QtWidgets.QLabel()
         self.mainbox.layout().addWidget(self.label)
 
         self.label.setText(title)
@@ -58,7 +60,7 @@ class PyQtLivePlotter(QtGui.QMainWindow):
     def _new_update(self, message):
         self.plots[message[1]].update_plot(message)
 
-        pg.QtGui.QApplication.processEvents()
+        pg.QtWidgets.QApplication.processEvents()
 
     def await_pipe(self):
         while self.pqueue.qsize() > 0:

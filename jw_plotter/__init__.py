@@ -1,8 +1,9 @@
-from plotter.pyqt_liveplotter_creatorconnector import pyqt_liveplotter_creatorconnector
-from plotter.PlotImplementations import Modes
+from jw_plotter.PlotImplementations import Modes
+import jw_plotter.pyqt_liveplotter_creatorconnector
 
 
-__client = pyqt_liveplotter_creatorconnector("Mein eins live")
+__client = pyqt_liveplotter_creatorconnector.pyqt_liveplotter_creatorconnector(
+    "Mein zwei live")
 
 
 update_plot = __client.update_plot
