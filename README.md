@@ -1,4 +1,4 @@
-# MegaLiveInstantActionPlotterDeluxe
+# JW Plotter
 
 PythonMegaLiveInstantActionPlotterDeluxe
 
